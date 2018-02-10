@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>List</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<script type="text/javascript">
+$(document).ready(function() {
+	 
+	  $.getJSON('http://localhost:8080/carduserlist', function(data) {
+		
+		 $.each(data,function(i,f){
+			 var tr="<tr><td>"+f.regId+"</td><td>" +f.acc_no+"</td><td>" +f.acc_card_holder_name+"</td><td>" +f.pincode+"</td><td>" +f.credit_card_no+"</td><td>" +f.cvv+"</td><td> <button class='btn btn-warning' onclick='javascript:edit(this.id)' id="+f.id+">Edit</button><button class='btn btn-dang' onclick='javascript:trdelete(this.id)' id="+f.id+">Delete</button></td></tr>"
+		   	 $('#table').append(tr); 	
+			
+		   
+			 
+		 });
+	    
+	  });
+	 
+	});
+function edit(id)
+{
+  $('<form action="/CardDetailsForm"><input type="text" value="'+id+'" id="edit_id" name="edit_id"></form>').appendTo('body').submit();
+ // session.setAttribute("userId", id);
+}
+</script>
+<body>
+
+<div class="container">
+  <h2 class="text-center">List Page</h2>
+  <div class="row">
+    <button class="btn btn-success pull-right">Add <span class="glyphicon glyphicon-plus"></span></button>
+  </div>        
+  <table class="table table-striped" id="table">
+    <thead>
+      <tr>
+        <th>Field 1</th>
+        <th>Field 2</th>
+        <th>Field 3</th>
+        <th>Field 4</th>
+        <th>Field 5</th>
+         <th>Edit 
+         Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <!-- <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+        <th><button class="btn btn-warning">Edit</button>
+         <button class="btn btn-danger">Delete</button></th> -->
+      </tr>
+      
+     
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
